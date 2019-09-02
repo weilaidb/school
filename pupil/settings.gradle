@@ -1,1 +1,1 @@
-include ':study', ':app', ':base', ':instantapp'
+include ':app'
