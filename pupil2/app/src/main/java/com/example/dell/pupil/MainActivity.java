@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -33,18 +35,44 @@ public class MainActivity extends AppCompatActivity {
         buttonset();
     }
 
+
+
     public void buttonset()
     {
-        Button btn1 = (Button)findViewById(R.id.button_bishun);
-        btn1.setOnClickListener(new View.OnClickListener() {
+        handler_buttonbishun();
+        handler_buttongushi();
+    }
+
+    public void handler_buttonbishun()
+    {
+        Button btn_bishun = (Button)findViewById(R.id.button_bishun);
+        btn_bishun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("https://www.hanzi5.com/bishun/");
+                String texttmp = (String)getResources().getString(R.string.text_bishun);
+                Uri uri = Uri.parse(texttmp);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
         });
     }
+
+    public void handler_buttongushi()
+    {
+        Button btn_gushi = (Button)findViewById(R.id.button_gushi);
+        btn_gushi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String texttmp = (String)getResources().getString(R.string.text_gushi);
+                Uri uri = Uri.parse(texttmp);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
