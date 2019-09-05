@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 Uri uri = Uri.parse(texttmp);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+//                MainActivity.this.startActivityForResult(intent, 0x11);
             }
         });
     }
@@ -81,23 +82,24 @@ public class MainActivity extends AppCompatActivity {
         btn_zuoye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    ComponentName componentName = new ComponentName(
-                            "com.tencent.mobileqq",
-                            "com.tencent.mobileqq.activity.SplashActivity");
-                    intent.setComponent(componentName);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    Toast toast=Toast.makeText(MainActivity.this,"手机未安装QQ",Toast.LENGTH_SHORT    );
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
+//                ComponentName comp=new ComponentName(MainActivity.this,SecondActivity.class);
+                ComponentName comp=new ComponentName("com.example.dell.pupil",
+                        "com.example.dell.pupil.SecondActivity");
+                Intent intent = new Intent();
+                intent.setComponent(comp);
+                startActivity(intent);
+                MainActivity.this.startActivityForResult(intent,0x22);
             }
         });
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 0x11) {
+            Toast.makeText(this, "我回来了", Toast.LENGTH_SHORT).show();
+//        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
