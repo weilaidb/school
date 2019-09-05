@@ -45,6 +45,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="88dp"
                 android:text="看作业" />
+
+            <Button
+                android:id="@+id/button_eveningstory"
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                android:text="晚安故事" />
+
+            <Button
+                android:id="@+id/button_record"
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                android:text="记错" />
         </LinearLayout>
     </FrameLayout>
 

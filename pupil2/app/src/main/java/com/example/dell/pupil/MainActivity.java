@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         handler_buttongushi();
 //        handler_buttonzuoye();
         handler_buttonzuoyeext();
+        handler_button_eveningtory();
+        handler_button_recorderror();
     }
 
     public void handler_buttonbishun()
@@ -94,30 +96,74 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     public void handler_buttonzuoyeext()
     {
         Button btn_zuoye = (Button)findViewById(R.id.button_zuoye);
         btn_zuoye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    ComponentName componentName = new ComponentName(
-                            "com.tencent.mobileqq",
-                            "com.tencent.mobileqq.activity.SplashActivity");
-                    Intent intent = new Intent(Intent.ACTION_QUICK_VIEW);
-                    intent.setAction(Intent.ACTION_MAIN);
-                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setComponent(componentName);
-                    startActivityForResult(intent,0x33);
-                } catch (Exception e) {
-                    Toast toast=Toast.makeText(MainActivity.this,"手机未安装QQ",Toast.LENGTH_SHORT    );
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
+                pubIntentJump("com.tencent.mobileqq",
+                        "com.tencent.mobileqq.activity.SplashActivity",
+                        "手机未安装QQ"
+                );
             }
         });
     }
+
+    public void handler_button_eveningtory()
+    {
+        Button btn_story = (Button)findViewById(R.id.button_eveningstory);
+        btn_story.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pubIntentJump("com.ximalaya.ting.android",
+                        "com.ximalaya.ting.android.host.activity.MainActivity",
+                        "手机未安装喜马拉雅"
+                );
+            }
+        });
+    }
+
+    public void handler_button_recorderror()
+    {
+        Button btn_record = (Button)findViewById(R.id.button_record);
+        btn_record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pubIntentJump("com.miui.notes",
+                        "com.miui.notes.ui.NotesListActivity",
+                        "手机未记事本"
+                );
+            }
+        });
+    }
+
+
+    public  void pubIntentJump(String pkgname, String activyname, String iferrtips)
+    {
+        try {
+            ComponentName componentName = new ComponentName(
+                    pkgname,
+                    activyname);
+            Intent intent = new Intent(Intent.ACTION_QUICK_VIEW);
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setComponent(componentName);
+            startActivity(intent);
+//                    startActivityForResult(intent,0x33);
+        } catch (Exception e) {
+            Toast toast=Toast.makeText(MainActivity.this,iferrtips,Toast.LENGTH_SHORT    );
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+
+    }
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
