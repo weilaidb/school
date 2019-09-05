@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     {
         handler_buttonbishun();
         handler_buttongushi();
-        handler_buttonzuoye();
+//        handler_buttonzuoye();
+        handler_buttonzuoyeext();
     }
 
     public void handler_buttonbishun()
@@ -89,6 +90,31 @@ public class MainActivity extends AppCompatActivity {
                 intent.setComponent(comp);
                 startActivity(intent);
                 MainActivity.this.startActivityForResult(intent,0x22);
+            }
+        });
+    }
+
+    public void handler_buttonzuoyeext()
+    {
+        Button btn_zuoye = (Button)findViewById(R.id.button_zuoye);
+        btn_zuoye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    ComponentName componentName = new ComponentName(
+                            "com.tencent.mobileqq",
+                            "com.tencent.mobileqq.activity.SplashActivity");
+                    Intent intent = new Intent(Intent.ACTION_QUICK_VIEW);
+                    intent.setAction(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setComponent(componentName);
+                    startActivityForResult(intent,0x33);
+                } catch (Exception e) {
+                    Toast toast=Toast.makeText(MainActivity.this,"手机未安装QQ",Toast.LENGTH_SHORT    );
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
             }
         });
     }
