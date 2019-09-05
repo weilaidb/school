@@ -39,6 +39,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="88dp"
                 android:text="古诗" />
+
+            <Button
+                android:id="@+id/button_zuoye"
+                android:layout_width="match_parent"
+                android:layout_height="73dp"
+                android:text="看作业" />
         </LinearLayout>
     </FrameLayout>
 

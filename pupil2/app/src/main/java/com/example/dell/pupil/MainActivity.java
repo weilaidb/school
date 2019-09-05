@@ -1,5 +1,6 @@
 package com.example.dell.pupil;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,10 +8,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     {
         handler_buttonbishun();
         handler_buttongushi();
+        handler_buttonzuoye();
     }
 
     public void handler_buttonbishun()
@@ -71,6 +75,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void handler_buttonzuoye()
+    {
+        Button btn_zuoye = (Button)findViewById(R.id.button_zuoye);
+        btn_zuoye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    ComponentName componentName = new ComponentName(
+                            "com.tencent.mobileqq",
+                            "com.tencent.mobileqq.activity.SplashActivity");
+                    intent.setComponent(componentName);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast toast=Toast.makeText(MainActivity.this,"手机未安装QQ",Toast.LENGTH_SHORT    );
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+            }
+        });
+    }
 
 
 
