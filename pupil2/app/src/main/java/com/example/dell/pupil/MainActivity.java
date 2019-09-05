@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         handler_buttonzuoyeext();
         handler_button_eveningtory();
         handler_button_recorderror();
+        handler_button_homework();
     }
 
     public void handler_buttonbishun()
@@ -134,7 +135,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 pubIntentJump("com.miui.notes",
                         "com.miui.notes.ui.NotesListActivity",
-                        "手机未记事本"
+                        "手机未安装记事本"
+                );
+            }
+        });
+    }
+
+    public void handler_button_homework()
+    {
+        Button btn_homework = (Button)findViewById(R.id.button_photo_homework);
+        btn_homework.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pubIntentJump("com.android.camera",
+                        "com.android.camera.Camera",
+                        "手机未安装相机"
                 );
             }
         });
