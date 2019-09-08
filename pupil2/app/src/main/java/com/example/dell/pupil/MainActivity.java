@@ -39,125 +39,77 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public void buttonset()
-    {
+    public void buttonset() {
         handler_buttonbishun();
         handler_buttongushi();
-//        handler_buttonzuoye();
-        handler_buttonzuoyeext();
-        handler_button_eveningtory();
-        handler_button_recorderror();
-        handler_button_homework();
+        handler_button_pub_url(R.id.button_shouchaobao, "https://www.banbaowang.com/shouchaobao/");
+
+        handler_button_pub(R.id.button_zuoye, "com.tencent.mobileqq",
+                 "com.tencent.mobileqq.activity.SplashActivity",
+                "手机未安装QQ");
+        handler_button_pub(R.id.button_eveningstory, "com.ximalaya.ting.android",
+                "com.ximalaya.ting.android.host.activity.MainActivity",
+                "手机未安装喜马拉雅");
+        handler_button_pub(R.id.button_record, "com.miui.notes",
+                "com.miui.notes.ui.NotesListActivity",
+                "手机未安装记事本");
+        handler_button_pub(R.id.button_photo_homework, "com.android.camera",
+                "com.android.camera.Camera",
+                "手机未安装相机");
+        handler_button_pub(R.id.button_yongzhong, "com.wiseman.writing",
+                "com.wiseman.writing.activity.SplashAdActivity",
+                "手机未安装相机");
+        handler_button_pub(R.id.button_findthings, "cn.wps.moffice_eng",
+                "cn.wps.moffice.documentmanager.PreStartActivity",
+                "手机未安装WPS");
+
     }
 
-    public void handler_buttonbishun()
-    {
-        Button btn_bishun = (Button)findViewById(R.id.button_bishun);
-        btn_bishun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String texttmp = (String)getResources().getString(R.string.text_bishun);
-                Uri uri = Uri.parse(texttmp);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+    public void handler_buttonbishun() {
+        handler_button_pub_url(R.id.button_bishun, getResources().getString(R.string.text_bishun));
     }
 
-    public void handler_buttongushi()
-    {
-        Button btn_gushi = (Button)findViewById(R.id.button_gushi);
-        btn_gushi.setOnClickListener(new View.OnClickListener() {
+    public void handler_buttongushi() {
+        handler_button_pub_url(R.id.button_gushi, getResources().getString(R.string.text_gushi));
+    }
+
+    public void handler_button_pub_url(int id, final String surl) {
+        Button btn = (Button) findViewById(id);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String texttmp = (String)getResources().getString(R.string.text_gushi);
-                Uri uri = Uri.parse(texttmp);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+
+                try {
+                    String texttmp = (String) surl;
+                    Uri uri = Uri.parse(texttmp);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
 //                MainActivity.this.startActivityForResult(intent, 0x11);
-            }
-        });
-    }
-
-    public void handler_buttonzuoye()
-    {
-        Button btn_zuoye = (Button)findViewById(R.id.button_zuoye);
-        btn_zuoye.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                ComponentName comp=new ComponentName(MainActivity.this,SecondActivity.class);
-                ComponentName comp=new ComponentName("com.example.dell.pupil",
-                        "com.example.dell.pupil.SecondActivity");
-                Intent intent = new Intent();
-                intent.setComponent(comp);
-                startActivity(intent);
-                MainActivity.this.startActivityForResult(intent,0x22);
+                } catch (Exception e) {
+                    Toast toast = Toast.makeText(MainActivity.this, "打开网址失败" + surl, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
             }
         });
     }
 
 
-
-    public void handler_buttonzuoyeext()
-    {
-        Button btn_zuoye = (Button)findViewById(R.id.button_zuoye);
-        btn_zuoye.setOnClickListener(new View.OnClickListener() {
+    public void handler_button_pub(int id, final String pkgname, final String activityname, final String errortip) {
+        Button btn = (Button) findViewById(id);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pubIntentJump("com.tencent.mobileqq",
-                        "com.tencent.mobileqq.activity.SplashActivity",
-                        "手机未安装QQ"
-                );
-            }
-        });
-    }
-
-    public void handler_button_eveningtory()
-    {
-        Button btn_story = (Button)findViewById(R.id.button_eveningstory);
-        btn_story.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pubIntentJump("com.ximalaya.ting.android",
-                        "com.ximalaya.ting.android.host.activity.MainActivity",
-                        "手机未安装喜马拉雅"
-                );
-            }
-        });
-    }
-
-    public void handler_button_recorderror()
-    {
-        Button btn_record = (Button)findViewById(R.id.button_record);
-        btn_record.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pubIntentJump("com.miui.notes",
-                        "com.miui.notes.ui.NotesListActivity",
-                        "手机未安装记事本"
-                );
-            }
-        });
-    }
-
-    public void handler_button_homework()
-    {
-        Button btn_homework = (Button)findViewById(R.id.button_photo_homework);
-        btn_homework.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pubIntentJump("com.android.camera",
-                        "com.android.camera.Camera",
-                        "手机未安装相机"
+                pubIntentJump(pkgname,
+                        activityname,
+                        errortip
                 );
             }
         });
     }
 
 
-    public  void pubIntentJump(String pkgname, String activyname, String iferrtips)
-    {
+    public void pubIntentJump(String pkgname, String activyname, String iferrtips) {
         try {
             ComponentName componentName = new ComponentName(
                     pkgname,
@@ -170,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 //                    startActivityForResult(intent,0x33);
         } catch (Exception e) {
-            Toast toast=Toast.makeText(MainActivity.this,iferrtips,Toast.LENGTH_SHORT    );
+            Toast toast = Toast.makeText(MainActivity.this, iferrtips, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
@@ -178,13 +130,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 //        if (requestCode == 0x11) {
-            Toast.makeText(this, "我回来了", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "我回来了", Toast.LENGTH_SHORT).show();
 //        }
     }
 
